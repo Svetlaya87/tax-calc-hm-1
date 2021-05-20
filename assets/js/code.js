@@ -1,7 +1,7 @@
 function calcTax() {
 const Deduction = 12550;
 
-sumFromUser = ( ( +Math.abs(sumInput.value) ) - Deduction);
+sumFromUser = ( ( +sumInput.value ) - Deduction);
 
 const rate1=10/100; //10%     0-  9950 doll
 const rate2=12/100;//12%   9951- 40525 
@@ -25,7 +25,7 @@ let sumTaxRate1=0, sumTaxRate2=0, sumTaxRate3=0, sumTaxRate4=0, sumTaxRate5=0, s
 let sumTaxTotal=0;
 
 
-    if (sumFromUser<0) {
+    if (sumFromUser<=0) {
         sumTaxTotal=0;
         console.log(sumTaxTotal);
 
@@ -33,7 +33,8 @@ let sumTaxTotal=0;
     }
 
 
-    else if (sumFromUser>=0 && sumFromUser<=uppBorderRate1) {
+    //rate1 10%     0-  9950 doll
+    else if (sumFromUser < (uppBorderRate1+1) ) {
     
         sumTaxRate1 =sumFromUser*rate1;
         sumTaxTotal = sumTaxRate1;
@@ -45,11 +46,15 @@ let sumTaxTotal=0;
     
     } 
     
-    else if ( sumFromUser>=(uppBorderRate1+1) && sumFromUser<=uppBorderRate2 ) {
+
+    //rate2 12%   9951- 40525
+    else if ( sumFromUser < (uppBorderRate2+1)) {
         sumTaxRate1 = uppBorderRate1*rate1;
         sumTaxRate2 = (sumFromUser- uppBorderRate1) * rate2;
         sumTaxTotal = sumTaxRate1+sumTaxRate2;
 
+        console.log(sumTaxRate1);
+        console.log(sumTaxRate2);
         console.log(sumTaxTotal);
 
         SumTax2021.innerHTML=` ${ ( Math.round(sumTaxTotal*100) )/100 }&#36;`;
@@ -57,19 +62,23 @@ let sumTaxTotal=0;
 
     } 
     
-    else if ( sumFromUser>=(uppBorderRate2+1) && sumFromUser<=uppBorderRate3 ){
+
+    //rate3 22%  40526- 86375
+    else if ( sumFromUser < (uppBorderRate3+1) ){
         sumTaxRate1 = uppBorderRate1 * rate1;
         sumTaxRate2 = (uppBorderRate2 - uppBorderRate1) * rate2;
         sumTaxRate3 = (sumFromUser - uppBorderRate2) * rate3;
         sumTaxTotal = sumTaxRate1 + sumTaxRate2 + sumTaxRate3;
 
-        console.log(sumTaxTotal);
+        console.log(sumTaxRate1, sumTaxRate2, sumTaxRate3, sumTaxTotal);
         
         SumTax2021.innerHTML=` ${ ( Math.round(sumTaxTotal*100) )/100 }&#36;`;
 
     }
 
-    else if ( sumFromUser>=(uppBorderRate3+1) && sumFromUser<=uppBorderRate4 ){
+
+    //rate4 24%  86376-164925
+    else if ( sumFromUser < (uppBorderRate4+1) ){
         sumTaxRate1 = uppBorderRate1 * rate1;
         sumTaxRate2 = (uppBorderRate2 - uppBorderRate1) * rate2;
         sumTaxRate3 = (uppBorderRate3 - uppBorderRate2) * rate3;
@@ -84,7 +93,9 @@ let sumTaxTotal=0;
 
     }
 
-    else if ( sumFromUser>=(uppBorderRate4+1) && sumFromUser<=uppBorderRate5 ){
+
+    //rate5 32% 164926-209425
+    else if ( sumFromUser < (uppBorderRate5+1) ){
         sumTaxRate1 = uppBorderRate1 * rate1;
         sumTaxRate2 = (uppBorderRate2 - uppBorderRate1) * rate2;
         sumTaxRate3 = (uppBorderRate3 - uppBorderRate2) * rate3;
@@ -101,7 +112,8 @@ let sumTaxTotal=0;
     }
 
 
-    else if ( sumFromUser>=(uppBorderRate5+1) && sumFromUser<=uppBorderRate6 ){
+    //rate6 35% 209426-523600 (в условии получилось 523601)
+    else if ( sumFromUser < (uppBorderRate6+1) ){
         sumTaxRate1 = uppBorderRate1 * rate1;
         sumTaxRate2 = (uppBorderRate2 - uppBorderRate1) * rate2;
         sumTaxRate3 = (uppBorderRate3 - uppBorderRate2) * rate3;
@@ -117,6 +129,8 @@ let sumTaxTotal=0;
 
     }
 
+
+    //rate7 37% 523600-more
     else if ( sumFromUser>=(uppBorderRate6+1)){
         sumTaxRate1 = uppBorderRate1 * rate1;
         sumTaxRate2 = (uppBorderRate2 - uppBorderRate1) * rate2;
